@@ -17,6 +17,16 @@ public class Usuario {
     private String FechaAlta;
     private String Estado;
     private String tipousuario;
+    private Connection conexion;
+    private String Mensaje;  // para los mensajes de confirmación o error
+
+    public String getMensaje() {
+        return Mensaje;
+    }
+
+    public void setMensaje(String Mensaje) {
+        this.Mensaje = Mensaje;
+    }
 
     public String getIdUsuario() {
         return IdUsuario;
@@ -66,6 +76,7 @@ public class Usuario {
         this.tipousuario = tipousuario;
     }
 
+    // constructor
     public Usuario(String Usuario, String Contrasenia, String FechaAlta, String Estado, String tipousuario) {
         this.Usuario = Usuario;
         this.Contrasenia = Contrasenia;
@@ -73,23 +84,21 @@ public class Usuario {
         this.Estado = Estado;
         this.tipousuario = tipousuario;
     }
-
-   
-    
-    
-      // constructor
+  
     public Usuario(Connection p_Conexion)
     {
         conexion = p_Conexion;
     }
 
-     public ResultSet Listar(String dni)
+     public ResultSet login()
     {
         try
         {
             // crear un CallableStatement para la ejecución del procedimiento almacenado
-            CallableStatement cst = conexion.prepareCall("CALL Login('"+dni+"' )");
+            CallableStatement cst = conexion.prepareCall("CALL Login('?','?' )");
              // asignar valor a los parametros del procedimiento almacenado
+            cst.setString("pUsuario", getUsuario());
+            cst.setString("PContrasenia", getContrasenia());
             
             return cst.executeQuery();
         }
@@ -100,45 +109,5 @@ public class Usuario {
             return null;
         }
     }
-     
-     public ResultSet Listarcandidatos(String dni)
-    {
-        try
-        {
-            // crear un CallableStatement para la ejecución del procedimiento almacenado
-            CallableStatement cst = conexion.prepareCall("CALL Listar_Candidatos()");
-             // asignar valor a los parametros del procedimiento almacenado
-            
-            return cst.executeQuery();
-        }
-        catch (SQLException ex)
-        {
-            setMensaje("Error: " + ex.getMessage());
-            // retornar el valor de la función
-            return null;
-        }
-    }
-    
-     public ResultSet VerificarVotacion(int idalumno)
-    {
-        try
-        {
-            // crear un CallableStatement para la ejecución del procedimiento almacenado
-            CallableStatement cst = conexion.prepareCall("CALL verificarvotacion('"+idalumno+"')");
-             // asignar valor a los parametros del procedimiento almacenado
-            
-            return cst.executeQuery();
-        }
-        catch (SQLException ex)
-        {
-            setMensaje("Error: " + ex.getMessage());
-            // retornar el valor de la función
-            return null;
-        }
-    }
-    
-    
-    
-    
-    
+
 }
