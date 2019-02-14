@@ -46,11 +46,10 @@ function loadProfile() {
     if(!supportsHTML5Storage()) { return false; }
     // we have to provide to the callback the basic
     // information to set the profile
-    getLocalProfile(function(profileImgSrc, profileName, profileReAuthEmail) {
+    getLocalProfile(function(profileImgSrc, profileName) {
         //changes in the UI
         $("#profile-img").attr("src",profileImgSrc);
         $("#profile-name").html(profileName);
-        $("#reauth-email").html(profileReAuthEmail);
         $("#inputEmail").hide();
         $("#remember").hide();
     });

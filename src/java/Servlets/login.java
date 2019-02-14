@@ -44,11 +44,11 @@ public class login extends HttpServlet {
             Clases.Usuario user = new Usuario(conex.conexion);
 
         String usuario = request.getParameter("user");
-        String clave = request.getParameter("password");
+        String contrasenia = request.getParameter("password");
         String id="",nombres="",dni="",grado="",seccion="";
-        al.setDNI(usuario);
-
-        ResultSet lista = al.Listar(usuario);
+        user.setUsuario(usuario);
+        user.setContrasenia(contrasenia);
+        ResultSet lista = user.login();
 
         try {
             int k = 0;
