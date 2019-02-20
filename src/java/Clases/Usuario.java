@@ -95,9 +95,9 @@ public class Usuario {
         try
         {
             // crear un CallableStatement para la ejecución del procedimiento almacenado
-            CallableStatement cst = conexion.prepareCall("CALL Login('?','?' )");
+            CallableStatement cst = conexion.prepareCall("CALL pa_Login('?','?')");
              // asignar valor a los parametros del procedimiento almacenado
-            cst.setString("pUsuario", getUsuario());
+            cst.setString("PUsuario", getUsuario());
             cst.setString("PContrasenia", getContrasenia());
             
             return cst.executeQuery();
