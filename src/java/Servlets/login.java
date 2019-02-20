@@ -45,7 +45,7 @@ public class login extends HttpServlet {
 
         String usuario = request.getParameter("user");
         String contrasenia = request.getParameter("password");
-        String id="",nombres="",dni="",grado="",seccion="";
+        String Nombre_IE="",Nombre_Docente="",Anio_Academico="",Usuario="";
         user.setUsuario(usuario);
         user.setContrasenia(contrasenia);
         ResultSet lista = user.login();
@@ -54,13 +54,11 @@ public class login extends HttpServlet {
             int k = 0;
             while (lista.next()) {
                 k++;
-                id=lista.getString("IdAlumno");
-                nombres=lista.getString("Apellidos_Nombres");
-                dni=lista.getString("DNI");
-                grado=lista.getString("Grado");
-                seccion=lista.getString("Seccion");
-              
-            }
+                Nombre_IE=lista.getString("Nombre_IE");
+                Nombre_Docente=lista.getString("Nombre_Docente");
+                Anio_Academico=lista.getString("Anio_Academico");
+                Usuario=lista.getString("Usuario");
+              }
             
         } catch (Exception ex) {
             out.print(ex);
@@ -68,9 +66,12 @@ public class login extends HttpServlet {
             conex.Cerrar_Conexion();
         }
 
-        if (usuario.equalsIgnoreCase(dni) && clave.equals(dni)) {
+        if (usuario.equalsIgnoreCase(usuario) && contrasenia.equals(usuario)) {
             HttpSession sesion = request.getSession(true);
-            sesion.setAttribute("nombre", nombres);
+            sesion.setAttribute("nombre", Nombre_IE);
+            sesion.setAttribute("nombre", Nombre_Docente);
+            sesion.setAttribute("nombre", Anio_Academico);
+            sesion.setAttribute("nombre", Usuario);
             response.sendRedirect("votacion.jsp");
         } else {
             response.sendRedirect("index.html");
