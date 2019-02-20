@@ -17,8 +17,8 @@ public class conexion {
     // definición de los miembros de la clase
     public static Connection conexion =  null;
     
-    public static String host = "localhost:3306";
-    public static String database = "cdhquispicanchi";
+    public static String host = "127.0.0.1";
+    public static String database = "CDHQUISPICANCHI";
     public static String url = "jdbc:mysql://" + host + "/" + database;
     public static String user = "root";
     public static String pass = "";

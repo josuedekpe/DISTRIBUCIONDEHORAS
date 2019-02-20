@@ -66,15 +66,15 @@ public class login extends HttpServlet {
             conex.Cerrar_Conexion();
         }
 
-        if (usuario.equalsIgnoreCase(usuario) && contrasenia.equals(usuario)) {
+        if (usuario.equalsIgnoreCase(Usuario)) {
             HttpSession sesion = request.getSession(true);
             sesion.setAttribute("nombre", Nombre_IE);
             sesion.setAttribute("nombre", Nombre_Docente);
             sesion.setAttribute("nombre", Anio_Academico);
             sesion.setAttribute("nombre", Usuario);
-            response.sendRedirect("votacion.jsp");
+            response.sendRedirect("Home.html");
         } else {
-            response.sendRedirect("index.html");
+            response.sendRedirect("login.html");
         }
         
         
