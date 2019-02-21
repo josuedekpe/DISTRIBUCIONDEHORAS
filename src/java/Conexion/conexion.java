@@ -21,7 +21,7 @@ public class conexion {
     public static String database = "CDHQUISPICANCHI";
     public static String url = "jdbc:mysql://" + host + "/" + database;
     public static String user = "root";
-    public static String pass = "root";
+    public static String pass = "";
     public static String Driver_MySql = "com.mysql.jdbc.Driver";
     //public static String Driver_SqlServer = "com.microsoft.sqlserver.jdbc.SQLServerDriver";
     //public static String Driver_Oracle = "oracle.jdbc.driver.OracleDriver";    
@@ -72,3 +72,5 @@ public class conexion {
         }
     }  
 }
+
+
