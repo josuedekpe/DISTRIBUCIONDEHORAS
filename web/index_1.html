@@ -18,6 +18,49 @@
 
     <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        
+                <script>
+            $(document).ready(
+            function (){
+                $("#mensaje").hide();
+            }); 
+            
+            
+            //guardar datos
+            function guardadatos()
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: "../sCita",
+                    data: "&Procedimiento=spInsertarDocente&"+$("#table1").serialize(),
+                    success: function (respuesta) {
+                        alert(respuesta);
+                    }
+                });
+                //controlamos los request y response del servidor 
+                $(document).ajaxStart(function (){
+                    $("#mensaje").show();
+                });
+                $(document).ajaxStop(function (){
+                    $("#mensaje").hide();
+                });
+                
+            }
+            
+            function listarclinica()
+            {
+                $.ajax({
+                    type: 'POST',
+                    url: "../SClinica",
+                    data: "&Procedimiento=listarclinica",
+                    success: function (respuesta) {
+                         $("#idseleccion").html(respuesta);
+                    }
+                });
+                
+            }
+
+        </script>
     </head>
 
     <body>
@@ -43,11 +86,14 @@
                     <div id="dash_users_body" class="collapsible-body">
                         <ul>
                             <li id="users_seller">
-                                <a class="waves-effect" style="text-decoration: none;" href="#!">Usuario</a>
+                                <a class="waves-effect" style="text-decoration: none;" href="#!">Docente</a>
                             </li>
 
                             <li id="users_customer">
-                                <a class="waves-effect" style="text-decoration: none;" href="#!">Doc</a>
+                                <a class="waves-effect" style="text-decoration: none;" href="#!">Usuario</a>
+                            </li>
+                             <li id="users_customer">
+                                <a class="waves-effect" style="text-decoration: none;" href="#!">Institucion Educativa</a>
                             </li>
                         </ul>
                     </div>
@@ -157,7 +203,7 @@
                                     </div>
                                     <div class="input-field col s12 m6">
                                         <i class="material-icons prefix">comment</i>
-                                        <input id="icon_telephone" type="text" class="validate">
+                                        <input id="icon_telephone" type="text" class="validate" data-length="8">
                                         <label for="icon_telephone">DNI</label>
                                     </div>
 
@@ -185,10 +231,45 @@
                                             });
                                         });
                                     </script>
-                                    <div class="input-field col s12">
+                                    <div class="input-field col s12 m4">
                                         <input type="date" id="fecha" class="datepicker">
 
                                     </div>
+                                    <div class="input-field col s12 m4">
+                                        <input type="date" id="fecha" class="datepicker">
+
+                                    </div>
+                                    <div class="input-field col s12 m4">
+                                        <i class="material-icons prefix">phone</i>
+                                        <input id="icon_telephone" type="text" class="validate">
+                                        <label for="icon_telephone">Telefono</label>
+                                    </div>
+                                    <div class="input-field col s12 m6">
+                                        <i class="material-icons prefix">email</i>
+                                        <input id="icon_telephone" type="text" class="validate">
+                                        <label for="icon_telephone">Correo</label>
+                                    </div>
+                                    <div class="input-field col s12 m6">
+                                        <select>
+                                            <option value="0" disabled selected>Seleccione su opcion</option>
+                                            <option value="1">Escala 1</option>
+                                            <option value="2">Escala 2</option>
+                                            <option value="3">Escala 3</option>
+                                            <option value="2">Escala 4</option>
+                                            <option value="3">Escala 5</option>
+                                        </select>
+                                        <label>Escala Magisterial</label>
+                                    </div>
+                                    <div class="input-field col s12 m6">
+                                        <select>
+                                            <option value="0" disabled selected>Seleccione su opcion</option>
+                                            <option value="1">Docente</option>
+                                            <option value="2">Director</option>
+                                            <option value="3">Otro</option>
+                                        </select>
+                                        <label>Cargo</label>
+                                    </div>
+
                                 </div>
                             </form>
                         </div>
@@ -198,6 +279,50 @@
 
                
             </div>
+            
+            
+            
+            <div class="row">
+                
+                
+                <div class="row">
+                    <form class="col s12">
+                        <div class="left card-title">
+                                <b>Especialidad del Docente</b>
+                            </div>
+                        
+                        <div class="input-field col s12 m6">
+                                        <select>
+                                            <option value="0" disabled selected>Seleccione su opcion</option>
+                                            <option value="1">Docente</option>
+                                            <option value="2">Director</option>
+                                            <option value="3">Otro</option>
+                                        </select>
+                                        <label>Cargo</label>
+                        </div> <button> agregar</button>
+                        
+                        
+                        <div class="col s12 ">
+                     <table class="striped highlight">
+                         <thead>
+                             <tr>
+                                 <th>Id Especialidad</th>
+                                 <th>Id Docente</th>
+                                 <th>Id Especialidad</th>
+                                 
+                             </tr>
+                         </thead>
+
+                         
+                     </table>
+
+                     
+                     
+                 </div>
+                        </div>
+                    </form>
+                </div>
+    
 
              <div class="row">
                  <div class="col s12 ">
