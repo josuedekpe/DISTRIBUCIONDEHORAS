@@ -4,49 +4,38 @@
     <head>
         <meta charset="UTF-8">
         <title>Distribucion de Horas UGEL Quispicanchi</title>
-
-
-        <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css'>
+        <link rel='stylesheet' href='css/materialize.min.css'>
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/font/material-design-icons/Material-Design-Icons.woff'>
-
         <link rel="stylesheet" href="css/style.css">
-
-
-    </head>
-
-    <body>
-
-    <head>
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        
-                <script>
+
+        <script>
             $(document).ready(
-            function (){
-                $("#mensaje").hide();
-            }); 
-            
-            
+                    function () {
+                        $("#mensaje").hide();
+                    });
+
             //guardar datos
             function guardadatos()
             {
                 $.ajax({
                     type: 'POST',
                     url: "../sCita",
-                    data: "&Procedimiento=spInsertarDocente&"+$("#table1").serialize(),
+                    data: "&Procedimiento=spInsertarDocente&" + $("#table1").serialize(),
                     success: function (respuesta) {
                         alert(respuesta);
                     }
                 });
                 //controlamos los request y response del servidor 
-                $(document).ajaxStart(function (){
+                $(document).ajaxStart(function () {
                     $("#mensaje").show();
                 });
-                $(document).ajaxStop(function (){
+                $(document).ajaxStop(function () {
                     $("#mensaje").hide();
                 });
-                
+
             }
-            
+
             function listarclinica()
             {
                 $.ajax({
@@ -54,10 +43,10 @@
                     url: "../SClinica",
                     data: "&Procedimiento=listarclinica",
                     success: function (respuesta) {
-                         $("#idseleccion").html(respuesta);
+                        $("#idseleccion").html(respuesta);
                     }
                 });
-                
+
             }
 
         </script>
@@ -92,7 +81,7 @@
                             <li id="users_customer">
                                 <a class="waves-effect" style="text-decoration: none;" href="#!">Usuario</a>
                             </li>
-                             <li id="users_customer">
+                            <li id="users_customer">
                                 <a class="waves-effect" style="text-decoration: none;" href="#!">Institucion Educativa</a>
                             </li>
                         </ul>
@@ -186,6 +175,11 @@
                         <div class="row">
                             <form class="col s12">
                                 <div class="row">
+                                    <!-- Modal Trigger -->
+                                    <div class="input-field col s12 m4">
+                                        <a class="waves-effect waves-light btn modal-trigger red" id="m1" href="#modal1">Agregar Docente</a>
+                                    </div>
+
                                     <div class="input-field col s12 m4">
                                         <i class="material-icons prefix">account_box  </i>
                                         <input id="icon_prefix" type="text" class="validate">
@@ -273,83 +267,83 @@
                                 </div>
                             </form>
                         </div>
-                       
+
                     </div>
                 </div>
 
-               
+
             </div>
-            
-            
-            
+
+
+
             <div class="row">
-                
-                
+
+
                 <div class="row">
                     <form class="col s12">
                         <div class="left card-title">
-                                <b>Especialidad del Docente</b>
-                            </div>
-                        
-                        <div class="input-field col s12 m6">
-                                        <select>
-                                            <option value="0" disabled selected>Seleccione su opcion</option>
-                                            <option value="1">Docente</option>
-                                            <option value="2">Director</option>
-                                            <option value="3">Otro</option>
-                                        </select>
-                                        <label>Cargo</label>
-                        </div> <button> agregar</button>
-                        
-                        
-                        <div class="col s12 ">
-                     <table class="striped highlight">
-                         <thead>
-                             <tr>
-                                 <th>Id Especialidad</th>
-                                 <th>Id Docente</th>
-                                 <th>Id Especialidad</th>
-                                 
-                             </tr>
-                         </thead>
-
-                         
-                     </table>
-
-                     
-                     
-                 </div>
+                            <b>Especialidad del Docente</b>
                         </div>
-                    </form>
+
+                        <div class="input-field col s12 m6">
+                            <select>
+                                <option value="0" disabled selected>Seleccione su opcion</option>
+                                <option value="1">Docente</option>
+                                <option value="2">Director</option>
+                                <option value="3">Otro</option>
+                            </select>
+                            <label>Cargo</label>
+                        </div> <button> agregar</button>
+
+
+                        <div class="col s12 ">
+                            <table class="striped highlight">
+                                <thead>
+                                    <tr>
+                                        <th>Id Especialidad</th>
+                                        <th>Id Docente</th>
+                                        <th>Id Especialidad</th>
+
+                                    </tr>
+                                </thead>
+
+
+                            </table>
+
+
+
+                        </div>
                 </div>
-    
+                </form>
+            </div>
 
-             <div class="row">
-                 <div class="col s12 ">
-                     <table class="striped highlight">
-                         <thead>
-                             <tr>
-                                 <th>Id Docente</th>
-                                 <th>Ap Paterno</th>
-                                 <th>Ap Materno</th>
-                                 <th>Nombres</th>
-                                 <th>DNI</th>
-                                 <th>Codigo Modular</th>
-                                 <th>Fecha Nacimiento</th>
-                                 <th>Fecha Ingreso</th>
-                                 <th>Telefono</th>
-                                 <th>Correo</th>
-                                 <th>Escala Magisterial</th>
-                             </tr>
-                         </thead>
 
-                         
-                     </table>
+            <div class="row">
+                <div class="col s12 ">
+                    <table class="striped highlight">
+                        <thead>
+                            <tr>
+                                <th>Id Docente</th>
+                                <th>Ap Paterno</th>
+                                <th>Ap Materno</th>
+                                <th>Nombres</th>
+                                <th>DNI</th>
+                                <th>Codigo Modular</th>
+                                <th>Fecha Nacimiento</th>
+                                <th>Fecha Ingreso</th>
+                                <th>Telefono</th>
+                                <th>Correo</th>
+                                <th>Escala Magisterial</th>
+                            </tr>
+                        </thead>
 
-                     
-                     
-                 </div>
-             </div>
+
+                    </table>
+
+
+
+                </div>
+            </div>
 
             <div class="fixed-action-btn click-to-toggle" style="bottom: 45px; right: 24px;">
                 <a class="btn-floating btn-large pink waves-effect waves-light">
@@ -407,7 +401,6 @@
 </html>
 <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js'></script>
-
 
 <script  src="js/index.js"></script>
 
