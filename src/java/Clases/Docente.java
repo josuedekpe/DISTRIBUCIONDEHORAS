@@ -4,12 +4,16 @@
  * and open the template in the editor.
  */
 package Clases;
-
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 /**
  *
  * @author PC-04
  */
 public class Docente {
+
     private String IdDocente;
     private String ApPaterno;
     private String ApMaterno;
@@ -21,6 +25,24 @@ public class Docente {
     private String Telefono;
     private String Correo;
     private String EscMagisterial;
+    private String Cargo;
+    private Connection conexion;
+
+    public String getCargo() {
+        return Cargo;
+    }
+
+    public void setCargo(String Cargo) {
+        this.Cargo = Cargo;
+    }
+
+    public Connection getConexion() {
+        return conexion;
+    }
+
+    public void setConexion(Connection conexion) {
+        this.conexion = conexion;
+    }
 
     public String getIdDocente() {
         return IdDocente;
@@ -110,7 +132,8 @@ public class Docente {
         this.EscMagisterial = EscMagisterial;
     }
 
-    public Docente(String ApPaterno, String ApMaterno, String Nombres, String DNI, String CodigoModular, String Fecha_Nac, String Fecha_Ingreso, String Telefono, String Correo, String EscMagisterial) {
+    public Docente(String IdDocente, String ApPaterno, String ApMaterno, String Nombres, String DNI, String CodigoModular, String Fecha_Nac, String Fecha_Ingreso, String Telefono, String Correo, String EscMagisterial, String Cargo) {
+        this.IdDocente = IdDocente;
         this.ApPaterno = ApPaterno;
         this.ApMaterno = ApMaterno;
         this.Nombres = Nombres;
@@ -121,6 +144,41 @@ public class Docente {
         this.Telefono = Telefono;
         this.Correo = Correo;
         this.EscMagisterial = EscMagisterial;
+        this.Cargo = Cargo;
     }
-    
+
+    public Docente(Connection p_Conexion) {
+        conexion = p_Conexion;
+    }
+
+    public ResultSet ListarDocente() {
+        try {
+            // crear un CallableStatement para la ejecución del procedimiento almacenado
+            CallableStatement cst = conexion.prepareCall("CALL spMostarDocente()");
+            // ejecutar el procedimiento almacenado y retornar el resultado
+            return cst.executeQuery();
+        } catch (SQLException ex) {
+
+            // retornar el valor de la función
+            return null;
+        }
+    }
+
+    // definición de los metodos de la clase
+
+    public boolean Insertar() {
+        try {
+            // crear un CallableStatement para la ejecución del procedimiento almacenado
+            CallableStatement cst = conexion.prepareCall("CALL spInsertarDocente('D0000001'," + ApPaterno + "','" + ApMaterno + "'," + Nombres + "," + DNI + "," + CodigoModular + "," + Telefono + "," + Correo + "," + EscMagisterial + "," + Cargo + ")");
+            // asignar valor a los parametros del procedimiento almacenado
+            // ejecutar el procedimiento almacenado
+            cst.execute();
+
+            return true;
+
+        } catch (SQLException ex) {
+
+            return false;
+        }
+    }
 }
